@@ -1,0 +1,19 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Maintenance Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let request of maintenanceRequests" class="request-item">
+      <ion-label>
+        <h2>{{ request.description }}</h2>
+        <p>Status: {{ request.status }}</p>
+      </ion-label>
+      <ion-button slot="end" (click)="completeRequest(request)" *ngIf="request.status !== 'completed'">
+        Mark as Completed
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

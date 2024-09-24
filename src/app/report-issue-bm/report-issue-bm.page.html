@@ -1,0 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Report Building Manager</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let serviceProvider of serviceProviders" class="user-item">
+      <ion-label>
+        <h2>{{ serviceProvider.email }}</h2>
+        <p>Service Provider</p>
+        <p>Status: {{ serviceProvider.status }}</p>
+      </ion-label>
+      <ion-button slot="end" (click)="reportIssue(serviceProvider)">Report Issue</ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

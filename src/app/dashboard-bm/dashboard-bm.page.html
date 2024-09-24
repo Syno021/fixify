@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Maintenance Requests</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="hero-section animate__animated animate__fadeIn">
+    <h1>Business Manager Dashboard</h1>
+    <p>Sort your requests and Accept offers</p>
+  </div>
+
+  <!-- Filter Segment for Status -->
+  <ion-segment (ionChange)="segmentChanged($event)" value="all">
+    <ion-segment-button value="All">
+      <ion-label>All</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pending">
+      <ion-label>Pending</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="inProgress">
+      <ion-label>In-progress</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="completed">
+      <ion-label>Completed</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- List of Maintenance Requests -->
+  <ion-list>
+    <ion-item *ngFor="let request of filteredRequests" (click)="openModal(request)">
+      <ion-label>
+        <h2>{{ request.type }}</h2>
+        <p>{{ request.description }}</p>
+        <p>Status: {{ request.status }}</p>
+        <p>Offer: R{{ request.amount }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <!-- Show a message when no requests are available -->
+  <ion-item *ngIf="filteredRequests.length === 0">
+    <ion-label>No maintenance requests found.</ion-label>
+  </ion-item>
+</ion-content>

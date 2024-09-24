@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isLogin ? 'Login' : 'Registration' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding login-registration-page">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon [name]="isLogin ? 'log-in' : 'person-add'" class="title-icon"></ion-icon>
+        {{ isLogin ? 'Welcome Back' : 'Join Us' }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-icon name="mail" slot="start"></ion-icon>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon name="lock-closed" slot="start"></ion-icon>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+        </ion-item>
+
+        <ng-container *ngIf="!isLogin">
+          <ion-item>
+            <ion-icon name="lock-closed" slot="start"></ion-icon>
+            <ion-label position="floating">Confirm Password</ion-label>
+            <ion-input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" required></ion-input>
+          </ion-item>
+
+          <ion-radio-group [(ngModel)]="userType" name="userType">
+            <ion-item>
+              <ion-icon name="business" slot="start"></ion-icon>
+              <ion-label>Service Provider</ion-label>
+              <ion-radio value="sp"></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="home" slot="start"></ion-icon>
+              <ion-label>Building Manager</ion-label>
+              <ion-radio value="bm"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+
+          <ng-container *ngIf="userType === 'sp'">
+            <ion-item>
+              <ion-icon name="person" slot="start"></ion-icon>
+              <ion-label position="floating">Name</ion-label>
+              <ion-input type="text" [(ngModel)]="name" name="name" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="person" slot="start"></ion-icon>
+              <ion-label position="floating">Surname</ion-label>
+              <ion-input type="text" [(ngModel)]="surname" name="surname" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="call" slot="start"></ion-icon>
+              <ion-label position="floating">Phone Number</ion-label>
+              <ion-input type="text" [(ngModel)]="phoneNumber" name="phoneNumber" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="location" slot="start"></ion-icon>
+              <ion-label position="floating">Location</ion-label>
+              <ion-input type="text" [(ngModel)]="location" name="location" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="construct" slot="start"></ion-icon>
+              <ion-label position="floating">Services</ion-label>
+              <ion-input type="text" [(ngModel)]="services" name="services" required></ion-input>
+            </ion-item>
+          </ng-container>
+
+          <ng-container *ngIf="userType === 'bm'">
+            <ion-item>
+              <ion-icon name="business" slot="start"></ion-icon>
+              <ion-label position="floating">Building Name</ion-label>
+              <ion-input type="text" [(ngModel)]="buildingName" name="buildingName" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="cube" slot="start"></ion-icon>
+              <ion-label position="floating">Building Type</ion-label>
+              <ion-input type="text" [(ngModel)]="buildingType" name="buildingType" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="location" slot="start"></ion-icon>
+              <ion-label position="floating">Location</ion-label>
+              <ion-input type="text" [(ngModel)]="location" name="location" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="person" slot="start"></ion-icon>
+              <ion-label position="floating">Manager Name</ion-label>
+              <ion-input type="text" [(ngModel)]="name" name="name" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-icon name="call" slot="start"></ion-icon>
+              <ion-label position="floating">Manager Phone Number</ion-label>
+              <ion-input type="text" [(ngModel)]="phoneNumber" name="phoneNumber" required></ion-input>
+            </ion-item>
+          </ng-container>
+
+          <ion-item>
+            <ion-icon name="images" slot="start"></ion-icon>
+            <ion-label position="stacked">Upload 5 Images</ion-label>
+            <ion-input type="file" (change)="onImageChange($event)" multiple accept="image/*" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="document" slot="start"></ion-icon>
+            <ion-label position="stacked">Upload 5 Documents</ion-label>
+            <ion-input type="file" (change)="onDocumentChange($event)" multiple accept=".pdf,.doc,.docx" required></ion-input>
+          </ion-item>
+        </ng-container>
+
+        <ion-button expand="block" type="submit" class="ion-margin-top">
+          <ion-icon [name]="isLogin ? 'log-in' : 'person-add'" slot="start"></ion-icon>
+          {{ isLogin ? 'Login' : 'Register' }}
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" fill="clear" class="toggle-form-button" (click)="toggleForm()">
+    <ion-icon [name]="isLogin ? 'person-add' : 'log-in'" slot="start"></ion-icon>
+    {{ isLogin ? 'Need an account? Register' : 'Already have an account? Login' }}
+  </ion-button>
+</ion-content>
